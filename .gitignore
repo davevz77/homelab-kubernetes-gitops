@@ -1,0 +1,23 @@
+# Secrets and credentials
+*.key
+*.pem
+*.crt
+*.kubeconfig
+admin.conf
+config
+*.token
+*.secret
+.env
+.env.*
+
+# Local notes with sensitive data
+notes/*password*
+notes/*secret*
+notes/*token*
+
+# OS files
+.DS_Store
+
+# Temporary files
+*.log
+*.tmp
