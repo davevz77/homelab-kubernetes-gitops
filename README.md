@@ -210,3 +210,19 @@ Mejoras planeadas:
 * Crear documentación más completa del laboratorio
 * Agregar ejemplos de CI/CD
 
+
+---
+
+## Screenshots / Evidencia Visual
+
+Visual evidence of the lab is available here:
+
+- [Screenshots / Evidencia Visual](docs/05-screenshots.md)
+
+Key screenshots include:
+
+- Argo CD managing Gatus as a Synced and Healthy application
+- Gatus monitoring Kubernetes internal services
+- Grafana Explore showing Loki logs
+- Grafana dashboards showing Kubernetes metrics
+- kubectl validation from the management workstation
