@@ -1,0 +1,44 @@
+flowchart TD
+    User[MacBook / Browser] --> Hosts[/Local DNS: /etc/hosts/]
+    Hosts --> Traefik[Traefik Ingress Controller<br/>192.168.0.32]
+
+    subgraph VMware["VMware Workstation Homelab"]
+        DevTools[devops-tools01<br/>kubectl / Helm / Git]
+        CP[k8s-cp01<br/>Control Plane]
+        W1[k8s-worker01]
+        W2[k8s-worker02]
+
+        CP --> Cilium[Cilium CNI]
+        W1 --> Cilium
+        W2 --> Cilium
+
+        MetalLB[MetalLB<br/>192.168.0.31-192.168.0.40]
+        Traefik --> MetalLB
+
+        subgraph Apps["Applications"]
+            Web[web.lab.local<br/>Nginx Demo]
+            Grafana[grafana.lab.local<br/>Grafana]
+            Argo[argocd.lab.local<br/>Argo CD]
+            Gatus[gatus.lab.local<br/>Gatus]
+        end
+
+        subgraph Observability["Observability"]
+            Prometheus[Prometheus]
+            Loki[Loki]
+            FluentBit[Fluent Bit]
+            Metrics[Metrics Server]
+        end
+
+        Traefik --> Web
+        Traefik --> Grafana
+        Traefik --> Argo
+        Traefik --> Gatus
+
+        FluentBit --> Loki
+        Prometheus --> Grafana
+        Loki --> Grafana
+        Metrics --> CP
+    end
+
+    DevTools --> CP
+    Argo --> Gatus
